@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .botao{
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+<body onload="inicia()">
+    <center>
+        <div class="container">
+            <div class="white">
+                <div class="light gray">
+                    
+                    <h3>CPF do Eleitor</h3>
+                    <form action="">
+    
+                        <input type="number" id="cpf" placeholder="CPF do eleitor">
+                        
+                    </form>
+                    <h4>Numero do Candidato:</h4>
+                    <h4 id="numCandidato"></h4>
+                    <img id="foto" src="" alt="" style="width: 200px; height: 200px;">
+                    </div>
+                    <div class="light gray">
+                                <h3>
+                             <br>JUSTIÇA <br> ELEITORAL <br>
+                                </h3>
+                            </div>
+                        </center>
+                        <div class="black">
+    
+                            <center>
+                           <button id="n1" onclick="f1()" class="botao">1</button>
+                           <button id="n2" onclick="f2()" class="botao">2</button>
+                           <button id="n3" onclick="f3()" class="botao">3</button><br>
+                           <button id="n4" onclick="f4()" class="botao">4</button>
+                           <button id="n5" onclick="f5()" class="botao">5</button>
+                           <button id="n6" onclick="f6()" class="botao">6</button><br>
+                           <button id="n7" onclick="f7()" class="botao">7</button>
+                           <button id="n8" onclick="f8()" class="botao">8</button>
+                           <button id="n9" onclick="f9()" class="botao">9</button><br>
+                           <center><button id="n0" onclick="f0()" class="botao">0</button></center>
+                           </center>
+                           <div></div>
+                           <center>
+                           <br><button onclick="branco()" style="background-color:white ;">BRANCO</button>
+                           <button onclick="corrige()" style="background-color:rgb(255, 115, 0) ;">CORRIGE</button>
+                           <button onclick="confirma()" style="background-color:green;">CONFIRMAR</button>
+    </center>
+</body>
+</html>
+<script>
+    var candidatos = []
+    var numCandidato = ""
+    var listaCpf = []
+
+    function f0() {
+        numCandidato += "0"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f1() {
+        numCandidato += "1"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f2() {
+        numCandidato += "2"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f3() {
+        numCandidato += "3"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f4() {
+        numCandidato += "4"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f5() {
+        numCandidato += "5"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f6() {
+        numCandidato += "6"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f7() {
+        numCandidato += "7"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f8() {
+        numCandidato += "8"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+    function f9() {
+        numCandidato += "9"
+        document.getElementById("numCandidato").innerHTML = numCandidato
+        verificaVoto()
+    }
+
+    function verificaVoto(){
+    var fotinho = document.getElementById("foto")
+    if(numCandidato == "31"){
+        fotinho.src = "jackson.png"
+    }
+    else if(numCandidato == "33"){
+        fotinho.src = "marina.png"
+    }
+    else if(numCandidato == "81"){
+        fotinho.src = "vitoria.png"
+    }
+    else if(numCandidato == "21"){
+        fotinho.src = "camilli.png"
+    }
+    else if(numCandidato == "26"){
+        fotinho.src = "eduarda.png"
+    }
+    else{
+        fotinho.src = "NULO.png"
+    }
+    }
+    
+    function branco(){
+        var fotinho = document.getElementById("foto")
+        fotinho.src = "fim.png"
+    }
+
+    function corrige(){
+        document.getElementById("numCandidato").innerHTML = null
+        numCandidato = "" 
+    }
+    
+    function confirma(){
+        var fotinho = document.getElementById("foto")
+        fotinho.src = "fim.png" 
+        var cpfDigitado = document.getElementById("cpf").value
+        if (cpfDigitado == "") {
+            alert("Voce precisa preencher os campos corretamente")
+        }
+        else {
+            if (verificaseexiste(cpfDigitado) == false) {
+                listaCpf.push(cpfDigitado)
+                localStorage.setItem("CPF", JSON.stringify(listaCpf))
+                vota()
+                alert("Voto Cadastrado!")
+            }
+            else {
+                alert("Você ja votou!")
+            }
+        }
+    }
+        
+        function verificaseexiste(cpfDigitado) {
+            if(JSON.parse(localStorage.getItem("CPF")) !=null){
+            listaCpf = JSON.parse(localStorage.getItem("CPF"))
+        }
+        for (var cpf of listaCpf) {
+            if (cpfDigitado == cpf) {
+                return true
+            }
+        }
+        return false
+    }
+
+    function criaCandidato(nome, numero, cargo, votos){
+        var candidato = {
+            nome: nome,
+            numero: numero,
+            cargo: cargo,
+            votos, votos
+        }
+        candidatos.push(candidato)
+    }
+    function inicia(){
+
+        if (JSON.parse(localStorage.getItem("Candidatos")) !=null){
+            candidatos = JSON.parse(localStorage.getItem("Candidatos"))
+        }
+        else{
+        criaCandidato("Jackson", "31", "Presidente", 0)
+        criaCandidato("Marina", "33", "Presidente", 0)
+        criaCandidato("Policarpo", "81", "Presidente", 0)
+        criaCandidato("Eduarda", "26", "Presidente", 0)
+        criaCandidato("Camilli", "21", "Presidente", 0)
+        }
+
+        localStorage.setItem("Candidatos", JSON.stringify(candidatos))
+    }
+    function vota(){
+        for(candidato of candidatos){
+            if(numCandidato == candidato.numero){
+                candidato.votos ++
+                localStorage.setItem("Candidatos", JSON.stringify(candidatos))
+                console.log(candidato.nome + "...."+candidato.votos)
+                break
+            }
+        }
+    }
+
+   
+</script>
